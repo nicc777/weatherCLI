@@ -4,8 +4,6 @@ const fetch = require('node-fetch')
 
 const APIXU_KEY = process.env.ACCESS_KEY
 
-const DEBUG = false;
-
 const debugVar = (varName, aVar) => {
   if (process.env.DEBUG) {
     console.log('Variable "' + varName + '" value: ', aVar)
