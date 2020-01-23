@@ -24,16 +24,22 @@ $ npm install
 
 Create an account on [APIXU](https://www.apixu.com) to obtain your API key, and add it inside `src/commands.js`:
 
-```js
-// src/commands.js
+Set the access key as an environment variable (safer than storing keys in source code):
 
-const APIXU_KEY = "<YOUR APIXU KEY>";
+```bash
+$ export ACCESS_KEY="<YOUR APIXU KEY>"
 ```
 
 Finally, run the command below to see the application usage menu:
 
 ```bash
 $ node src/index.js --help
+```
+
+Optionally, you can also print the various variable values to the console by setting the DEBUG environment variable:
+
+```bash
+$ export DEBUG=1
 ```
 
 ## Built With
