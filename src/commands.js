@@ -2,22 +2,30 @@
 
 const fetch = require('node-fetch')
 
-const APIXU_KEY = '<YOUR APIXU KEY>'
+const APIXU_KEY = process.env.ACCESS_KEY
+
+const debugVar = (varName, aVar) => {
+  if (process.env.DEBUG) {
+    console.log('Variable "' + varName + '" value: ', aVar)
+  }
+}
 
 const fetchNow = async city => {
+  debugVar('city', city);
   const response = await fetch(
-    `https://api.apixu.com/v1/current.json?key=${APIXU_KEY}&q=${city}`
+    `http://api.weatherstack.com/current?access_key=${APIXU_KEY}&query=${city}`
   )
 
   const data = await response.json()
+  debugVar('data', data);
 
   const now = {
     location: data.location.name,
     country: data.location.country,
     longitude: data.location.lon,
     latitude: data.location.lat,
-    temparature: data.current.temp_c,
-    condition: data.current.condition.text
+    temparature: data.current.temperature,
+    condition: data.current.weather_descriptions
   }
 
   console.log(now)
@@ -25,7 +33,7 @@ const fetchNow = async city => {
 
 const weatherForecast = async city => {
   const response = await fetch(
-    `https://api.apixu.com/v1/forecast.json?key=${APIXU_KEY}&q=${city}`
+    `http://api.weatherstack.com/forecast?access_key=${APIXU_KEY}&query=${city}`
   )
   const data = await response.json()
 
